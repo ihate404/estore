@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC 
+	"-//mybatis.org//DTD Config 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!--properties配置参数--> 
+	<!--如果key相同,db.properties的优先级最高(较后执行)-->
+	<properties resource="config.properties">
+	</properties>
+  <!-- 类型别名 -->
+  <typeAliases> 
+	<package name="com.briup.bean"/>
+  </typeAliases>
+  <!-- 数据库开发环境 -->
+  <environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"></transactionManager>
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" /> 
+				<property name="url" value="${url}" /> 
+				<property name="username" value="${user}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments>
+  <mappers> 
+  	<mapper resource="com/briup/dao/customerMapper.xml"/>
+  	<mapper resource="com/briup/dao/categoryMapper.xml"/>
+  	<mapper resource="com/briup/dao/bookMapper.xml"/>
+  	<mapper resource="com/briup/dao/shopCarMapper.xml"/>
+  </mappers> 
+  
+</configuration> 

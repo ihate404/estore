@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.dao.ShopCarMapper">
+	<!--根据用户ID查询购物车  -->
+	<select id="selectCarByCustomerid" parameterType="long" resultType="ShopCar">
+		select * from es_shopcar
+		where customer_id=#{id}
+	</select>
+	<insert id="insertCar" parameterType="ShopCar">
+	     <selectKey keyProperty="id" resultType="long" order="BEFORE">
+	     	select my_seq.nextval from dual
+	     </selectKey>
+	     insert into es_shopcar(id,total,customer_id)
+	     values(#{id},#{total},#{customer.id})
+	</insert>
+	<!--保存购物车项目  -->
+	<insert id="insertItem" parameterType="ShopCarItem">
+		<selectKey keyProperty="id" resultType="long" order="BEFORE">
+	     	select my_seq.nextval from dual
+	     </selectKey>
+	     insert into es_shopcaritem(id,num,cost,book_id,shopcar_id)
+	     values(#{id},#{num},#{cost},${book.id},#{car.id})
+	</insert>
+	<update id="updateShopCarItem" parameterType="ShopCarItem">
+		update es_shopcaritem
+		<set>
+			<if test="num!=0">
+				num=#{num},
+			</if>
+			<if test="cost!=0">
+				cost=#{cost},
+			</if>
+			
+		</set>
+		where id=#{id}
+	</update>
+	<!--根据bookid查询item  -->
+	<select id="selectItemByBookId" parameterType="long" resultType="ShopCarItem">
+		select * from es_shopcaritem
+		where book_id=#{id}
+	</select>
+	<!--将item关联的书籍查询出来  -->
+	<resultMap type="Book" id="bookResult">
+		<result property="imgPath" column="images"/>
+	</resultMap>
+	
+	<resultMap type="ShopCarItem" id="itemResult">
+		<association property="book" column="book_id" select="selectBookById"/>
+	</resultMap>
+	<select id="selectBookById" parameterType="long" resultMap="bookResult">
+		select * from es_book
+		where id=#{id}
+	</select>
+	<select id="selectItemWithBook" resultMap="itemResult">
+		select * from es_shopcaritem
+	</select>
+</mapper>

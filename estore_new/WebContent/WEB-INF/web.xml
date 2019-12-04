@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>estore</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>ShowBookDetailServlet</display-name>
+    <servlet-name>ShowBookDetailServlet</servlet-name>
+    <servlet-class>com.briup.web.servlet.ShowBookDetailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowBookDetailServlet</servlet-name>
+    <url-pattern>/showBookDetailServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddShopCarServlet</display-name>
+    <servlet-name>AddShopCarServlet</servlet-name>
+    <servlet-class>com.briup.web.servlet.AddShopCarServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddShopCarServlet</servlet-name>
+    <url-pattern>/user/addShopCarServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ToShopCarServlet</display-name>
+    <servlet-name>ToShopCarServlet</servlet-name>
+    <servlet-class>com.briup.web.servlet.ToShopCarServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ToShopCarServlet</servlet-name>
+    <url-pattern>/user/toShopCarServlet</url-pattern>
+  </servlet-mapping>
+</web-app>
